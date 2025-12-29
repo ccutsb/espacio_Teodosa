@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contacto — Espacio Teodosa</title>
+  <meta name="description" content="Contacta con Espacio Teodosa — Reserva tu espacio de ensayo o grabación." />
+  <!-- Preload de fuentes críticas para carga rápida -->
+  <link rel="preload" href="assets/fonts/ZuumeRough-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="contact-page">
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Volver al inicio">
+        <h1>Espacio Teodosa</h1>
+      </a>
+
+      <div class="header-actions">
+        <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
+          <span class="hamburger"></span>
+        </button>
+      </div>
+
+      <nav id="main-nav" class="main-nav" role="navigation" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="about.html">Sobre</a></li>
+          <li><a href="index.html#services">Servicios</a></li>
+          <li><a href="index.html#equip">Equipamiento</a></li>
+          <li><a href="index.html#gallery">Galería</a></li>
+          <li><a href="contact.html" class="active">Contacto/Reservas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="section container" style="padding-top: 3rem;">
+      <h3>Contacto y reservas</h3>
+
+      <form id="contact-form" class="contact-form" data-action="https://formspree.io/f/mregzpnn" method="POST" novalidate>
+        <div class="form-row">
+          <label for="name">Nombre</label>
+          <input id="name" name="name" required autocomplete="name">
+        </div>
+
+        <div class="form-row">
+          <label for="email">Correo</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+
+        <div class="form-row">
+          <label for="phone">Teléfono (opcional)</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+
+        <div class="form-row">
+          <label for="service">Servicio</label>
+          <select id="service" name="service">
+            <option>Ensayo Estándar</option>
+            <option>Ensayo + Grabación</option>
+            <option>Ensayo + Grabación + 1 Cámara</option>
+            <option>Ensayo + Grabación + 2 Cámaras</option>
+            <option>Plan Mensual</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Mensaje / Fecha y hora preferida</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+          <a href="https://wa.me/56966683102?text=Hola,%20me%20interesa%20reservar%20un%20espacio%20en%20Espacio%20Teodosa" class="btn btn-outline" target="_blank">Contactar por WhatsApp</a>
+        </div>
+
+        <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="map">
+        <iframe src="https://www.google.com/maps?q=Santo+Domingo+2219+Santiago&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Espacio Teodosa en Google Maps"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <a id="floating-book" class="floating-book" href="https://wa.me/56966683102?text=Hola,%20me%20interesa%20reservar%20una%20sala%20en%20Espacio%20Teodosa" target="_blank" title="Contactanos por WhatsApp">
+    <span>Contáctanos</span>
+  </a>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Espacio Teodosa — Santo Domingo 2219, Santiago · Tel: <a href="tel:+56966683102">+56 9 6668 3102</a> · © <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="js/scripts.js" defer></script>
+</body>
+</html>
+

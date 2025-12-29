@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Espacio Teodosa — Ensayos & Grabación</title>
+  <meta name="description" content="Sala de ensayo y grabación en Santiago — Santo Domingo 2219. Reserva por horas o planes mensuales." />
+  <!-- Preload de fuentes críticas para carga rápida -->
+  <link rel="preload" href="assets/fonts/ZuumeRough-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="index-page">
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+          <a class="brand" href="index.html" aria-label="Volver al inicio">
+        <h1>Espacio Teodosa</h1>
+      </a>
+
+      <div class="header-actions">
+        <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
+          <span class="hamburger"></span>
+        </button>
+      </div>
+
+      <nav id="main-nav" class="main-nav" role="navigation" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="about.html">Sobre</a></li>
+          <li><a href="#services">Servicios</a></li>
+          <li><a href="#equip">Equipamiento</a></li>
+          <li><a href="#gallery">Galería</a></li>
+          <li><a href="contact.html">Contacto/Reservas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="page-main">
+    <!-- HERO (mobile-first) -->
+    <section class="hero">
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <h2>Un espacio para crear, ensayar y grabar</h2>
+          <p class="lead">Sala acústica de 17 m² junto a Metro Cumming. Ideal para bandas, solistas y proyectos audiovisuales.</p>
+          <div class="hero-ctas">
+            <a id="book-whatsapp" class="btn btn-primary" href="contact.html" rel="noopener">Reservar ahora</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <img src="assets/img/salaEnsayo.png" alt="Interior Espacio Teodosa" loading="lazy" width="600" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS (acordeón móvil / grid desktop) -->
+    <section id="services" class="section container">
+      <h3>Servicios y tarifas</h3>
+
+      <div class="services-responsive">
+        <!-- Mobile: accordion -->
+        <div class="accordion" id="services-accordion">
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false">Ensayo Estándar — $12.000 / h</button>
+            <div class="accordion-panel">
+              <p>Horario típico: 15:00–21:00. Sala equipada con batería, amplificadores y monitores.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false">Ensayo + Grabación de Audio — $18.000 / h</button>
+            <div class="accordion-panel">
+              <p>Grabación multipista básica con interfaz y edición mínima incluida.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false">Ensayo + Grabación + 1 Cámara — $25.000 / h</button>
+            <div class="accordion-panel">
+              <p>Registro audiovisual con 1 cámara y sincronización básica.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false">Ensayo + Grabación + 2 Cámaras — $30.000 / h</button>
+            <div class="accordion-panel">
+              <p>Grabación multicámara básica (2 ángulos) y entrega de material bruto.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-btn" aria-expanded="false">Plan Mensual — desde $80.000</button>
+            <div class="accordion-panel">
+              <p>Contacta para detalles y descuentos según uso.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop: grid -->
+        <div class="services-grid" aria-hidden="true">
+          <article class="card">
+            <h4>Ensayo Estándar</h4><p class="price">$12.000 / h</p><p>Horario 15-21 hrs. Sala equipada.</p>
+          </article>
+          <article class="card">
+            <h4>Ensayo + Grabación</h4><p class="price">$18.000 / h</p><p>Grabación multipista básica.</p>
+          </article>
+          <article class="card">
+            <h4>Ensayo + Grabación + 1 Cámara</h4><p class="price">$25.000 / h</p><p>Grabación audiovisual 1 cámara.</p>
+          </article>
+          <article class="card">
+            <h4>Ensayo + Grabación + 2 Cámaras</h4><p class="price">$30.000 / h</p><p>Grabación multicámara (2 ángulos).</p>
+          </article>
+          <article class="card">
+            <h4>Plan Mensual</h4><p class="price">Desde $80.000</p><p>Contacta para opciones.</p>
+          </article>
+        </div>
+      </div>
+
+      <p class="muted">Precios extraídos del dossier. Para cotizaciones personalizadas llamar al <a href="tel:+56966683102">+56 9 6668 3102</a> o <a href="contact.html">contactarnos</a>.</p>
+    </section>
+
+    <!-- EQUIPAMIENTO -->
+    <section id="equip" class="section container">
+      <h3>Equipamiento</h3>
+      <ul class="equip-list">
+        <li>Batería completa con atriles</li>
+        <li>Micrófonos y atriles para voces</li>
+        <li>Amplificador de bajo</li>
+        <li>Gabinetes de guitarra</li>
+        <li>Monitores activos</li>
+        <li>Consola 10 canales e interfaz 8ch</li>
+      </ul>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="gallery" class="section container">
+      <h3>Galería</h3>
+      <div class="gallery-carousel">
+        <button class="carousel-btn carousel-btn-prev" aria-label="Imagen anterior">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <a href="assets/img/salaEnsayo.png" class="gallery-item"><img src="assets/img/salaEnsayo.png" alt="Sala principal" loading="lazy" width="400" height="300"></a>
+            <a href="assets/img/salaEnsayo.png" class="gallery-item"><img src="assets/img/salaEnsayo.png" alt="Equipo" loading="lazy" width="400" height="300"></a>
+            <a href="assets/img/salaEnsayo.png" class="gallery-item"><img src="assets/img/salaEnsayo.png" alt="Grabación" loading="lazy" width="400" height="300"></a>
+            <a href="assets/img/salaEnsayo.png" class="gallery-item"><img src="assets/img/salaEnsayo.png" alt="Grabación" loading="lazy" width="400" height="300"></a>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-btn-next" aria-label="Imagen siguiente">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+        <div class="carousel-indicators" role="tablist" aria-label="Indicadores de galería"></div>
+      </div>
+    </section>
+
+    <!-- MAPA -->
+    <section class="section container">
+      <div class="map">
+        <iframe src="https://www.google.com/maps?q=Santo+Domingo+2219+Santiago&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Espacio Teodosa en Google Maps"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <a id="floating-book" class="floating-book" href="https://wa.me/56966683102?text=Hola,%20me%20interesa%20reservar%20un%20espacio%20en%20Espacio%20Teodosa" target="_blank" title="Contactanos por WhatsApp">
+    <span>Contactanos</span>
+  </a>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Espacio Teodosa — Santo Domingo 2219, Santiago · Tel: <a href="tel:+56966683102">+56 9 6668 3102</a> · © <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="js/scripts.js" defer></script>
+</body>
+</html>
