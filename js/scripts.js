@@ -1,459 +1,270 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const yearEl = document.getElementById('year');
-    if(yearEl) yearEl.textContent = new Date().getFullYear();
-  
-    const menuBtn = document.getElementById('menu-toggle');
-    const mainNav = document.getElementById('main-nav');
-    let navOverlay = null;
-    
-    const createOverlay = () => {
-      if (!navOverlay) {
-        navOverlay = document.createElement('div');
-        navOverlay.className = 'nav-overlay';
-        document.body.appendChild(navOverlay);
-      }
-      return navOverlay;
-    };
-    
-    const openMenu = () => {
-      if (window.innerWidth < 720) {
-        menuBtn.setAttribute('aria-expanded', 'true');
-        mainNav.style.display = 'block';
-        const overlay = createOverlay();
-        overlay.style.display = 'block';
-        requestAnimationFrame(() => {
-          overlay.classList.add('active');
-        });
-        document.body.style.overflow = 'hidden';
-      }
-    };
-    
-    const closeMenu = () => {
-      menuBtn.setAttribute('aria-expanded', 'false');
-      if (navOverlay) {
-        navOverlay.classList.remove('active');
-        setTimeout(() => {
-          navOverlay.style.display = 'none';
-        }, 300);
-      }
-      mainNav.style.display = 'none';
-      document.body.style.overflow = '';
-    };
-    
-    if (menuBtn && mainNav) {
-      menuBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        if (expanded) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-      
-      mainNav.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-      
-      document.addEventListener('click', (e) => {
-        if (window.innerWidth < 720 && 
-            navOverlay && 
-            navOverlay.classList.contains('active') &&
-            !mainNav.contains(e.target) && 
-            !menuBtn.contains(e.target) &&
-            e.target === navOverlay) {
-          closeMenu();
-        }
-      });
-      
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 720) {
-          closeMenu();
-        }
-      });
+document.addEventListener("DOMContentLoaded", () => {
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const menuBtn = document.getElementById("menu-toggle");
+  const mainNav = document.getElementById("main-nav");
+  let overlay = null;
+
+  const closeMenu = () => {
+    if (!menuBtn || !mainNav) return;
+    menuBtn.setAttribute("aria-expanded", "false");
+    mainNav.classList.remove("open");
+    if (overlay && overlay.parentNode) {
+      overlay.remove();
+      overlay = null;
     }
-  
-    document.querySelectorAll('.accordion-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        document.querySelectorAll('.accordion-btn').forEach(b => {
-          b.setAttribute('aria-expanded', 'false');
-          b.nextElementSibling.style.display = 'none';
-        });
-        if (!expanded) {
-          btn.setAttribute('aria-expanded', 'true');
-          btn.nextElementSibling.style.display = 'block';
-        } else {
-          btn.setAttribute('aria-expanded', 'false');
-          btn.nextElementSibling.style.display = 'none';
-        }
-      });
-    });
-  
-    const form = document.getElementById('contact-form');
-    const feedback = document.getElementById('form-feedback');
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        feedback.textContent = 'Enviando...';
-        const data = new FormData(form);
-        try {
-          const formAction = form.getAttribute('data-action') || form.action;
-          const res = await fetch(formAction, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-          if (res.ok) {
-            feedback.textContent = 'Solicitud enviada. Te contactamos pronto.';
-            form.reset();
-          } else {
-            feedback.textContent = 'No se pudo enviar. Intenta por teléfono o WhatsApp.';
-          }
-        } catch (err) {
-          feedback.textContent = 'Error de conexión. Revisa tu conexión e intenta de nuevo.';
-        }
-      });
-    }
-  
-    const navLinks = document.querySelectorAll('.nav-list a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth < 720 && menuBtn && mainNav) {
-          menuBtn.setAttribute('aria-expanded', 'false');
-          mainNav.style.display = 'none';
-          if (navOverlay) {
-            navOverlay.style.display = 'none';
-          }
-          document.body.style.overflow = '';
-        }
-      });
-    });
-  
-    // Lightbox para imágenes
-    let currentLightboxOverlay = null;
-    let currentEscHandler = null;
-    
-    const closeLightbox = () => {
-      if (currentLightboxOverlay && document.body.contains(currentLightboxOverlay)) {
-        // Remover el overlay
-        document.body.removeChild(currentLightboxOverlay);
-        // Restaurar el scroll SIEMPRE
-        document.body.style.overflow = '';
-        // También restaurar en html por si acaso
-        document.documentElement.style.overflow = '';
-        // Remover el event listener
-        if (currentEscHandler) {
-          document.removeEventListener('keydown', currentEscHandler);
-          currentEscHandler = null;
-        }
-        currentLightboxOverlay = null;
-      }
-    };
-    
-    const openLightbox = (src, alt) => {
-      // Cerrar cualquier lightbox abierto previamente
-      closeLightbox();
-      
-      const overlay = document.createElement('div');
-      overlay.className = 'lightbox-overlay';
-      overlay.setAttribute('role', 'dialog');
-      overlay.setAttribute('aria-modal', 'true');
-      overlay.setAttribute('aria-label', 'Vista ampliada de imagen');
-      
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = alt || 'Imagen de la galería';
-      img.className = 'lightbox-img';
-      
-      // Estilos inline para asegurar visibilidad
-      img.style.display = 'block';
-      img.style.opacity = '1';
-      img.style.visibility = 'visible';
-      img.style.position = 'relative';
-      img.style.zIndex = '10001';
-      
-      img.onload = () => {
-        // Asegurar que la imagen esté visible después de cargar
-        img.style.display = 'block';
-        img.style.opacity = '1';
-        img.style.visibility = 'visible';
-        // Forzar repaint
-        void img.offsetHeight;
-      };
-      
-      img.onerror = () => {
-        overlay.innerHTML = '<p style="color: var(--brand-1); font-size: 1.2rem; text-align: center; padding: 2rem;">Error al cargar la imagen</p>';
-      };
-      
-      overlay.appendChild(img);
-      
-      // Forzar que el overlay muestre la imagen
-      overlay.style.display = 'flex';
-      overlay.style.visibility = 'visible';
-      
-      // Función para cerrar
-      const handleClose = (e) => {
-        // Cerrar si se hace click en el overlay (fondo) o en la imagen
-        if (e.target === overlay || e.target === img) {
-          e.preventDefault();
-          e.stopPropagation();
-          closeLightbox();
-        }
-      };
-      
-      overlay.addEventListener('click', handleClose);
-      
-      // Handler para tecla Escape
-      currentEscHandler = (ev) => {
-        if (ev.key === 'Escape' && document.body.contains(overlay)) {
-          ev.preventDefault();
-          ev.stopPropagation();
-          closeLightbox();
-        }
-      };
-      
-      document.addEventListener('keydown', currentEscHandler);
-      
-      // Guardar referencia
-      currentLightboxOverlay = overlay;
-      
-      // Agregar al DOM
-      document.body.appendChild(overlay);
-      
-      // Bloquear scroll
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      
-      // Forzar reflow y asegurar que la imagen se muestre
-      requestAnimationFrame(() => {
-        void overlay.offsetHeight;
-        img.style.display = 'block';
-        img.style.opacity = '1';
-        img.style.visibility = 'visible';
-        overlay.style.display = 'flex';
-        overlay.style.visibility = 'visible';
-        
-        // En mobile, centrar la imagen verticalmente
-        if (window.innerWidth < 720) {
-          // Esperar a que la imagen se cargue completamente
-          if (img.complete) {
-            centerImageInOverlay();
-          } else {
-            img.addEventListener('load', centerImageInOverlay, { once: true });
-          }
-        }
-      });
-      
-      // Función para centrar la imagen en el overlay
-      const centerImageInOverlay = () => {
-        requestAnimationFrame(() => {
-          const overlayHeight = overlay.offsetHeight;
-          const imgHeight = img.offsetHeight;
-          if (imgHeight < overlayHeight) {
-            // Si la imagen es más pequeña que el overlay, centrarla
-            overlay.scrollTop = 0;
-          } else {
-            // Si la imagen es más grande, centrarla
-            overlay.scrollTop = (imgHeight - overlayHeight) / 2;
-          }
-        });
-      };
-    };
+    document.body.style.overflow = "";
+  };
 
-    // Carrusel de galería
-    const carousel = document.querySelector('.gallery-carousel');
-    if (carousel) {
-      const track = carousel.querySelector('.carousel-track');
-      const items = Array.from(carousel.querySelectorAll('.gallery-item'));
-      const prevBtn = carousel.querySelector('.carousel-btn-prev');
-      const nextBtn = carousel.querySelector('.carousel-btn-next');
-      const indicatorsContainer = carousel.querySelector('.carousel-indicators');
-      
-      let currentIndex = 0;
-      let itemsPerView = 1;
-      let touchStartX = 0;
-      let touchEndX = 0;
-      let isTransitioning = false;
+  const openMenu = () => {
+    if (!menuBtn || !mainNav) return;
+    menuBtn.setAttribute("aria-expanded", "true");
+    mainNav.classList.add("open");
+    overlay = document.createElement("div");
+    overlay.className = "nav-overlay";
+    overlay.addEventListener("click", closeMenu);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+  };
 
-      // Calcular items por vista según el tamaño de pantalla
-      const updateItemsPerView = () => {
-        const width = window.innerWidth;
-        if (width >= 1100) {
-          itemsPerView = 3;
-        } else if (width >= 720) {
-          itemsPerView = 2;
-        } else {
-          itemsPerView = 1;
-        }
-        updateCarousel();
-      };
-
-      // Crear indicadores
-      const createIndicators = () => {
-        indicatorsContainer.innerHTML = '';
-        const totalSlides = Math.ceil(items.length / itemsPerView);
-        for (let i = 0; i < totalSlides; i++) {
-          const indicator = document.createElement('button');
-          indicator.className = 'carousel-indicator';
-          indicator.setAttribute('role', 'tab');
-          indicator.setAttribute('aria-label', `Ir a la imagen ${i + 1}`);
-          indicator.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-          indicator.addEventListener('click', () => goToSlide(i));
-          indicatorsContainer.appendChild(indicator);
-        }
-        updateIndicators();
-      };
-
-      // Actualizar indicadores
-      const updateIndicators = () => {
-        const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
-        const activeIndicator = Math.floor(currentIndex / itemsPerView);
-        indicators.forEach((ind, i) => {
-          if (i === activeIndicator) {
-            ind.classList.add('active');
-            ind.setAttribute('aria-selected', 'true');
-          } else {
-            ind.classList.remove('active');
-            ind.setAttribute('aria-selected', 'false');
-          }
-        });
-      };
-
-      // Actualizar posición del carrusel
-      const updateCarousel = () => {
-        if (isTransitioning) return;
-        const totalSlides = Math.ceil(items.length / itemsPerView);
-        currentIndex = Math.min(currentIndex, totalSlides - 1);
-        const translateX = -(currentIndex * (100 / itemsPerView));
-        track.style.transform = `translateX(${translateX}%)`;
-        updateButtons();
-        updateIndicators();
-      };
-
-      // Actualizar estado de los botones
-      const updateButtons = () => {
-        const totalSlides = Math.ceil(items.length / itemsPerView);
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= totalSlides - 1;
-      };
-
-      // Ir a una slide específica
-      const goToSlide = (index) => {
-        if (isTransitioning) return;
-        const totalSlides = Math.ceil(items.length / itemsPerView);
-        currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-        updateCarousel();
-      };
-
-      // Slide siguiente
-      const nextSlide = () => {
-        if (isTransitioning) return;
-        const totalSlides = Math.ceil(items.length / itemsPerView);
-        if (currentIndex < totalSlides - 1) {
-          currentIndex++;
-          updateCarousel();
-        }
-      };
-
-      // Slide anterior
-      const prevSlide = () => {
-        if (isTransitioning) return;
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateCarousel();
-        }
-      };
-
-      // Event listeners para botones
-      prevBtn.addEventListener('click', prevSlide);
-      nextBtn.addEventListener('click', nextSlide);
-
-      // Navegación por teclado
-      carousel.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          prevSlide();
-        } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-          nextSlide();
-        }
-      });
-
-      // Soporte touch/swipe
-      track.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
-
-      track.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-      }, { passive: true });
-
-      const handleSwipe = () => {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-          if (diff > 0) {
-            nextSlide();
-          } else {
-            prevSlide();
-          }
-        }
-      };
-
-      // Prevenir transición durante el swipe
-      track.addEventListener('transitionstart', () => {
-        isTransitioning = true;
-      });
-
-      track.addEventListener('transitionend', () => {
-        isTransitioning = false;
-      });
-
-      // Click en imágenes para abrir lightbox
-      // Solo abrir lightbox si no se está haciendo click en los botones
-      items.forEach(item => {
-        item.addEventListener('click', (e) => {
-          // No abrir lightbox si se hace click en los botones del carrusel
-          if (e.target.closest('.carousel-btn')) {
-            return;
-          }
-          e.preventDefault();
-          const src = item.getAttribute('href');
-          const alt = item.querySelector('img')?.alt || '';
-          openLightbox(src, alt);
-        });
-      });
-      
-      // Asegurar que los botones tengan prioridad sobre el click de la imagen
-      [prevBtn, nextBtn].forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-        });
-      });
-
-      // Inicializar
-      updateItemsPerView();
-      createIndicators();
-      updateButtons();
-
-      // Actualizar en resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-          const oldItemsPerView = itemsPerView;
-          updateItemsPerView();
-          if (oldItemsPerView !== itemsPerView) {
-            createIndicators();
-        }
-      }, 250);
+  if (menuBtn && mainNav) {
+    menuBtn.addEventListener("click", () => {
+      const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+      if (expanded) closeMenu();
+      else openMenu();
     });
 
-      // Hacer el carrusel enfocable para navegación por teclado
-      carousel.setAttribute('tabindex', '0');
+    mainNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 720) closeMenu();
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 720) closeMenu();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+  }
+
+  const form = document.getElementById("contact-form");
+  const feedback = document.getElementById("form-feedback");
+  const submitBtn = document.getElementById("submit-btn");
+
+  const setFeedback = (message, status) => {
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.dataset.status = status;
+  };
+
+  if (form && feedback && submitBtn) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const action = form.getAttribute("data-action");
+      const payload = new FormData(form);
+
+      setFeedback("Enviando solicitud...", "loading");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando...";
+      form.setAttribute("aria-busy", "true");
+
+      try {
+        const response = await fetch(action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: payload
+        });
+
+        if (response.ok) {
+          setFeedback("Solicitud enviada. Te contactamos pronto.", "success");
+          form.reset();
+        } else {
+          setFeedback("No pudimos enviar el formulario. Intenta por WhatsApp o llamada.", "error");
+        }
+      } catch (error) {
+        setFeedback("Error de red. Revisa tu conexion e intenta nuevamente.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar solicitud";
+        form.removeAttribute("aria-busy");
+      }
+    });
+  }
+
+  const galleryButtons = Array.from(document.querySelectorAll("[data-lightbox]"));
+  const galleryTrack = document.querySelector(".gallery-track");
+  const galleryPrev = document.querySelector(".gallery-nav-prev");
+  const galleryNext = document.querySelector(".gallery-nav-next");
+  const galleryDots = document.querySelector(".gallery-dots");
+
+  let activeLightbox = null;
+  let activeLightboxIndex = 0;
+
+  const galleryItems = galleryButtons
+    .map((button) => ({
+      src: button.getAttribute("data-lightbox"),
+      alt: button.getAttribute("data-alt") || "Imagen de galeria"
+    }))
+    .filter((item) => item.src);
+
+  const isMobileGallery = () => window.innerWidth < 720;
+
+  const updateGalleryArrows = () => {
+    if (!galleryTrack || !galleryPrev || !galleryNext || !isMobileGallery()) return;
+    const maxScroll = galleryTrack.scrollWidth - galleryTrack.clientWidth;
+    const current = Math.round(galleryTrack.scrollLeft);
+    galleryPrev.disabled = current <= 4;
+    galleryNext.disabled = current >= maxScroll - 4;
+  };
+
+  const updateGalleryDots = () => {
+    if (!galleryTrack || !galleryDots || !isMobileGallery()) return;
+    const slide = Math.round(galleryTrack.scrollLeft / Math.max(1, galleryTrack.clientWidth));
+    galleryDots.querySelectorAll(".gallery-dot").forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === slide);
+    });
+  };
+
+  const goToGallerySlide = (index) => {
+    if (!galleryTrack || !isMobileGallery()) return;
+    const bounded = Math.max(0, Math.min(index, galleryItems.length - 1));
+    galleryTrack.scrollTo({ left: bounded * galleryTrack.clientWidth, behavior: "smooth" });
+  };
+
+  const initGalleryMobileUI = () => {
+    if (!galleryTrack || !galleryPrev || !galleryNext || !galleryDots) return;
+
+    if (!isMobileGallery()) {
+      galleryDots.innerHTML = "";
+      return;
     }
+
+    if (!galleryDots.children.length) {
+      galleryDots.innerHTML = "";
+      galleryItems.forEach((_, index) => {
+        const dot = document.createElement("span");
+        dot.className = "gallery-dot";
+        if (index === 0) dot.classList.add("active");
+        galleryDots.appendChild(dot);
+      });
+    }
+
+    updateGalleryArrows();
+    updateGalleryDots();
+  };
+
+  const closeLightbox = () => {
+    if (!activeLightbox) return;
+    activeLightbox.remove();
+    activeLightbox = null;
+    document.body.style.overflow = "";
+  };
+
+  const updateLightboxImage = () => {
+    if (!activeLightbox || !galleryItems.length) return;
+    const img = activeLightbox.querySelector("img");
+    const counter = activeLightbox.querySelector(".lightbox-counter");
+    const prevBtn = activeLightbox.querySelector(".lightbox-nav-prev");
+    const nextBtn = activeLightbox.querySelector(".lightbox-nav-next");
+    const data = galleryItems[activeLightboxIndex];
+
+    img.src = data.src;
+    img.alt = data.alt;
+    if (counter) counter.textContent = `${activeLightboxIndex + 1} / ${galleryItems.length}`;
+    if (prevBtn) prevBtn.disabled = activeLightboxIndex === 0;
+    if (nextBtn) nextBtn.disabled = activeLightboxIndex === galleryItems.length - 1;
+  };
+
+  const moveLightbox = (step) => {
+    if (!activeLightbox) return;
+    activeLightboxIndex = Math.max(0, Math.min(activeLightboxIndex + step, galleryItems.length - 1));
+    updateLightboxImage();
+  };
+
+  const openLightbox = (index) => {
+    if (!galleryItems.length) return;
+
+    closeLightbox();
+    activeLightboxIndex = index;
+
+    const lightbox = document.createElement("div");
+    lightbox.className = "lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "lightbox-close";
+    closeBtn.type = "button";
+    closeBtn.setAttribute("aria-label", "Cerrar imagen");
+    closeBtn.textContent = "×";
+
+    const prevBtn = document.createElement("button");
+    prevBtn.className = "lightbox-nav lightbox-nav-prev";
+    prevBtn.type = "button";
+    prevBtn.setAttribute("aria-label", "Imagen anterior");
+    prevBtn.textContent = "‹";
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "lightbox-nav lightbox-nav-next";
+    nextBtn.type = "button";
+    nextBtn.setAttribute("aria-label", "Imagen siguiente");
+    nextBtn.textContent = "›";
+
+    const img = document.createElement("img");
+
+    const counter = document.createElement("p");
+    counter.className = "lightbox-counter";
+
+    closeBtn.addEventListener("click", closeLightbox);
+    prevBtn.addEventListener("click", () => moveLightbox(-1));
+    nextBtn.addEventListener("click", () => moveLightbox(1));
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    lightbox.append(closeBtn, prevBtn, nextBtn, img, counter);
+    document.body.appendChild(lightbox);
+    document.body.style.overflow = "hidden";
+    activeLightbox = lightbox;
+    updateLightboxImage();
+    closeBtn.focus();
+  };
+
+  galleryButtons.forEach((button, index) => {
+    button.addEventListener("click", () => openLightbox(index));
   });
-  
+
+  if (galleryTrack && galleryPrev && galleryNext) {
+    galleryPrev.addEventListener("click", () => {
+      const current = Math.round(galleryTrack.scrollLeft / Math.max(1, galleryTrack.clientWidth));
+      goToGallerySlide(current - 1);
+    });
+
+    galleryNext.addEventListener("click", () => {
+      const current = Math.round(galleryTrack.scrollLeft / Math.max(1, galleryTrack.clientWidth));
+      goToGallerySlide(current + 1);
+    });
+
+    galleryTrack.addEventListener("scroll", () => {
+      updateGalleryArrows();
+      updateGalleryDots();
+    });
+
+    window.addEventListener("resize", initGalleryMobileUI);
+    initGalleryMobileUI();
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeLightbox();
+      return;
+    }
+
+    if (!activeLightbox) return;
+    if (event.key === "ArrowLeft") moveLightbox(-1);
+    if (event.key === "ArrowRight") moveLightbox(1);
+  });
+});

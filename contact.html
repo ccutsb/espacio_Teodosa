@@ -2,100 +2,162 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contacto — Espacio Teodosa</title>
-  <meta name="description" content="Contacta con Espacio Teodosa — Reserva tu espacio de ensayo o grabación." />
-  <!-- Preload de fuentes críticas para carga rápida -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto y Reservas | Espacio Teodosa</title>
+  <meta name="description" content="Reserva tu sala de ensayo o grabacion en Espacio Teodosa. Contacto por WhatsApp, llamada o formulario con Formspree." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://ccutsb.github.io/espacio_Teodosa/contact.html" />
+  <meta name="theme-color" content="#141010" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:title" content="Contacto y Reservas | Espacio Teodosa" />
+  <meta property="og:description" content="Agenda tu ensayo o grabacion en Santiago Centro. Te respondemos por WhatsApp o formulario." />
+  <meta property="og:url" content="https://ccutsb.github.io/espacio_Teodosa/contact.html" />
+  <meta property="og:image" content="https://ccutsb.github.io/espacio_Teodosa/assets/img/salaEnsayo.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contacto y Reservas | Espacio Teodosa" />
+  <meta name="twitter:description" content="Reserva por WhatsApp, llamada o formulario. Sala de ensayo cerca de Metro Cumming." />
+  <meta name="twitter:image" content="https://ccutsb.github.io/espacio_Teodosa/assets/img/salaEnsayo.webp" />
+
+  <link rel="preload" href="assets/fonts/ZuumeRough-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/ZuumeRough-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contacto Espacio Teodosa",
+    "url": "https://ccutsb.github.io/espacio_Teodosa/contact.html",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "Espacio Teodosa",
+      "telephone": "+56-9-6668-3102"
+    }
+  }
+  </script>
 </head>
 <body class="contact-page">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
   <header class="site-header" role="banner">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Volver al inicio">
-        <h1>Espacio Teodosa</h1>
+      <a class="brand" href="index.html" aria-label="Ir a inicio Espacio Teodosa">
+        <span class="brand-name">Espacio Teodosa</span>
       </a>
 
-      <div class="header-actions">
-        <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
-          <span class="hamburger"></span>
-        </button>
-      </div>
+      <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menu">
+        <span></span>
+      </button>
 
-      <nav id="main-nav" class="main-nav" role="navigation" aria-label="Navegación principal">
-        <ul class="nav-list">
+      <nav id="main-nav" class="main-nav" aria-label="Navegacion principal">
+        <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="about.html">Sobre</a></li>
-          <li><a href="index.html#services">Servicios</a></li>
-          <li><a href="index.html#equip">Equipamiento</a></li>
-          <li><a href="index.html#gallery">Galería</a></li>
-          <li><a href="contact.html" class="active">Contacto/Reservas</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#equipamiento">Equipamiento</a></li>
+          <li><a href="index.html#galeria">Galeria</a></li>
+          <li><a href="contact.html" class="active">Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="page-main">
-    <section class="section container" style="padding-top: 3rem;">
-      <h3>Contacto y reservas</h3>
+  <main id="contenido">
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Contacto y reservas</p>
+        <h1>Agenda tu ensayo o grabacion</h1>
+        <p class="section-intro">Cuéntanos tu idea, fecha y servicio. Si necesitas respuesta inmediata, usa WhatsApp o llamada directa.</p>
 
-      <form id="contact-form" class="contact-form" data-action="https://formspree.io/f/mregzpnn" method="POST" novalidate>
-        <div class="form-row">
-          <label for="name">Nombre</label>
-          <input id="name" name="name" required autocomplete="name">
+        <div class="quick-actions">
+          <a class="btn btn-secondary" href="https://wa.me/56966683102?text=Hola,%20quiero%20reservar%20en%20Espacio%20Teodosa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a class="btn btn-secondary" href="tel:+56966683102">Llamar</a>
         </div>
+      </div>
+    </section>
 
-        <div class="form-row">
-          <label for="email">Correo</label>
-          <input id="email" name="email" type="email" required autocomplete="email">
+    <section class="section alt-surface section-tight">
+      <div class="container form-layout">
+        <form id="contact-form" class="contact-form" data-action="https://formspree.io/f/mregzpnn" method="POST" novalidate>
+          <div class="form-row">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" required autocomplete="name" />
+          </div>
+
+          <div class="form-row">
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+
+          <div class="form-row">
+            <label for="phone">Telefono (opcional)</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+
+          <div class="form-row">
+            <label for="service">Servicio</label>
+            <select id="service" name="service" required>
+              <option value="Ensayo estandar">Ensayo estandar</option>
+              <option value="Cotización">Cotización</option>
+              <option value="Ensayo + grabacion audio">Ensayo + grabacion audio</option>
+              <option value="Ensayo + 1 camara">Ensayo + 1 camara</option>
+              <option value="Ensayo + 2 camaras">Ensayo + 2 camaras</option>
+              <option value="Plan mensual">Plan mensual</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="message">Mensaje y fecha tentativa</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button id="submit-btn" type="submit" class="btn btn-primary">Enviar solicitud</button>
+          </div>
+          <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="surface-card contact-side">
+          <h2>Informacion util</h2>
+          <ul>
+            <li>Direccion: Santo Domingo 2219, Santiago</li>
+            <li>Referencia: Metro Cumming</li>
+            <li>Telefono: <a href="tel:+56966683102">+56 9 6668 3102</a></li>
+            <li>Respuesta habitual: mismo dia habil</li>
+          </ul>
+          <div class="map">
+            <iframe src="https://www.google.com/maps?q=Santo+Domingo+2219+Santiago&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicacion de Espacio Teodosa en Google Maps"></iframe>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Busquedas frecuentes en Santiago</h2>
+        <div class="seo-links-grid">
+          <a href="sala-de-ensayo-santiago-centro.html">Sala de ensayo en Santiago Centro</a>
+          <a href="sala-de-ensayo-metro-cumming.html">Sala de ensayo cerca de Metro Cumming</a>
+          <a href="ensayo-y-grabacion-santiago.html">Ensayo y grabacion en Santiago</a>
+          <a href="grabacion-para-bandas-santiago.html">Grabacion para bandas en Santiago</a>
         </div>
-
-        <div class="form-row">
-          <label for="phone">Teléfono (opcional)</label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-
-        <div class="form-row">
-          <label for="service">Servicio</label>
-          <select id="service" name="service">
-            <option>Ensayo Estándar</option>
-            <option>Ensayo + Grabación</option>
-            <option>Ensayo + Grabación + 1 Cámara</option>
-            <option>Ensayo + Grabación + 2 Cámaras</option>
-            <option>Plan Mensual</option>
-          </select>
-        </div>
-
-        <div class="form-row">
-          <label for="message">Mensaje / Fecha y hora preferida</label>
-          <textarea id="message" name="message" rows="4"></textarea>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Enviar solicitud</button>
-          <a href="https://wa.me/56966683102?text=Hola,%20me%20interesa%20reservar%20un%20espacio%20en%20Espacio%20Teodosa" class="btn btn-outline" target="_blank">Contactar por WhatsApp</a>
-        </div>
-
-        <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
-      </form>
-
-      <div class="map">
-        <iframe src="https://www.google.com/maps?q=Santo+Domingo+2219+Santiago&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Espacio Teodosa en Google Maps"></iframe>
       </div>
     </section>
   </main>
 
-  <a id="floating-book" class="floating-book" href="https://wa.me/56966683102?text=Hola,%20me%20interesa%20reservar%20una%20sala%20en%20Espacio%20Teodosa" target="_blank" title="Contactanos por WhatsApp">
-    <span>Contáctanos</span>
+  <a class="floating-book" href="https://wa.me/56966683102?text=Hola,%20me%20interesa%20reservar%20en%20Espacio%20Teodosa" target="_blank" rel="noopener noreferrer" aria-label="Reservar por WhatsApp">
+    Reservar por WhatsApp
   </a>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>Espacio Teodosa — Santo Domingo 2219, Santiago · Tel: <a href="tel:+56966683102">+56 9 6668 3102</a> · © <span id="year"></span></p>
+    <div class="container footer-inner">
+      <p>Espacio Teodosa · Santo Domingo 2219, Santiago · <a href="tel:+56966683102">+56 9 6668 3102</a></p>
+      <p>© <span id="year"></span> Espacio Teodosa</p>
     </div>
   </footer>
 
   <script src="js/scripts.js" defer></script>
 </body>
 </html>
-

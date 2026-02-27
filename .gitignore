@@ -63,3 +63,10 @@ settings.local.json
 *.map
 *.orig
 
+# opencode / agent skills
+.skills/
+opencode-skills/
+.skills-cache/
+.agents/
+.opencode/
+skills-lock.json

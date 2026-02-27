@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ccutsb.github.io/espacio_Teodosa/sitemap.xml
