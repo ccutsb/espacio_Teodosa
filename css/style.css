@@ -170,6 +170,7 @@ a {
   border: 2px solid rgba(244, 190, 99, 0.45);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
   text-decoration: none;
+  background: rgba(244, 190, 99, 0.16);
 }
 
 .brand-name {
@@ -434,7 +435,7 @@ p {
 .hero-slide img source {
   width: 100%;
   aspect-ratio: 3 / 2;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
@@ -759,7 +760,7 @@ textarea {
 .map {
   margin-top: var(--space-24);
   border-radius: var(--radius-12);
-  overflow: hidden;
+  overflow:hidden;
   border: 1px solid var(--color-border);
 }
 
