@@ -2,6 +2,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  const heroSlides = document.querySelectorAll(".hero-slide");
+  const heroDots = document.querySelectorAll(".hero-dot");
+  let heroCurrentSlide = 0;
+  let heroAutoplayInterval = null;
+
+  const updateHeroSlide = (index) => {
+    heroSlides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    heroDots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+  };
+
+  const nextHeroSlide = () => {
+    heroCurrentSlide = (heroCurrentSlide + 1) % heroSlides.length;
+    updateHeroSlide(heroCurrentSlide);
+  };
+
+  const startHeroAutoplay = () => {
+    if (heroSlides.length > 1) {
+      heroAutoplayInterval = setInterval(nextHeroSlide, 3500);
+    }
+  };
+
+  const stopHeroAutoplay = () => {
+    if (heroAutoplayInterval) {
+      clearInterval(heroAutoplayInterval);
+      heroAutoplayInterval = null;
+    }
+  };
+
+  if (heroSlides.length > 0) {
+    updateHeroSlide(0);
+    startHeroAutoplay();
+
+    heroDots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const slideIndex = parseInt(dot.getAttribute("data-slide"), 10);
+        heroCurrentSlide = slideIndex;
+        updateHeroSlide(heroCurrentSlide);
+        stopHeroAutoplay();
+        startHeroAutoplay();
+      });
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopHeroAutoplay();
+      } else {
+        startHeroAutoplay();
+      }
+    });
+  }
+
   const menuBtn = document.getElementById("menu-toggle");
   const mainNav = document.getElementById("main-nav");
   let overlay = null;

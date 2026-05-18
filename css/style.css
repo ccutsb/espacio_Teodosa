@@ -392,6 +392,80 @@ p {
   object-fit: cover;
 }
 
+.hero-carousel {
+  position: relative;
+}
+
+.hero-slides {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  aspect-ratio: 3 / 2;
+}
+
+.hero-slide.slide-banda {
+  background-color: #1a1a1a; /* O un fondo oscuro que combine con Espacio Teodosa */
+}
+
+.hero-slide.slide-banda img {
+  object-fit: contain; /* Muestra el logo completo sin recortarlo */
+  padding: 24px;       /* Le da un margen interno elegante para que no toque los bordes */
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.hero-slide.active {
+  position: relative;
+  opacity: 1;
+}
+
+.hero-slide img source {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  display: block;
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(249, 244, 239, 0.4);
+  cursor: pointer;
+  transition: background-color 0.8s ease, transform 0.8s ease;
+}
+
+.hero-dot.active {
+  background: var(--color-primary);
+  transform: scale(1.25);
+}
+
+.hero-slide img, 
+.hero-slide picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .cta-row {
   display: flex;
   flex-wrap: wrap;

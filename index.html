@@ -86,12 +86,26 @@
             <a class="btn btn-secondary" href="#servicios">Ver precios</a>
           </div>
         </div>
-        <figure class="hero-media">
-          <picture>
-            <source srcset="assets/img/salaEnsayo.avif" type="image/avif" />
-            <source srcset="assets/img/salaEnsayo.webp" type="image/webp" />
-            <img src="assets/img/salaEnsayo.png" alt="Sala de ensayo Espacio Teodosa lista para tocar" width="1200" height="800" fetchpriority="high" />
-          </picture>
+        <figure class="hero-media hero-carousel">
+          <div class="hero-slides">
+            <picture class="hero-slide" data-image="assets/img/salaEnsayo">
+              <source srcset="assets/img/salaEnsayo.webp" type="image/webp" />
+              <img src="assets/img/salaEnsayo.png" alt="Sala de ensayo Espacio Teodosa lista para tocar" width="1200" height="800" fetchpriority="high" />
+            </picture>
+            <picture class="hero-slide slide-banda" data-image="assets/img/logo-banda1">
+              <source srcset="assets/img/clutterPastiche.png" type="image/png" />
+              <img src="assets/img/clutterPastiche.png" alt="Logo de banda Clutter Pastiche" width="1200" height="800" />
+            </picture>
+            <picture class="hero-slide slide-banda" data-image="assets/img/logo-banda2">
+              <source srcset="assets/img/jappyCumbia.PNG" type="image/png" />
+              <img src="assets/img/jappyCumbia.PNG" alt="Logo de banda Jappy Cumbia" width="1200" height="800" />
+            </picture>
+          </div>
+          <div class="hero-dots" aria-hidden="true">
+            <span class="hero-dot active" data-slide="0"></span>
+            <span class="hero-dot" data-slide="1"></span>
+            <span class="hero-dot" data-slide="2"></span>
+          </div>
         </figure>
       </div>
     </section>
@@ -197,14 +211,26 @@
             <span aria-hidden="true">‹</span>
           </button>
           <div class="gallery-track">
+            <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo3.webp" data-alt="Grabación setup completo" aria-label="Ampliar imagen description">
+              <img src="assets/img/salaEnsayo3.webp" alt="Grabación setup completo" loading="lazy" width="800" height="533" />
+            </button>
             <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo.webp" data-alt="Vista general de sala de ensayo" aria-label="Ampliar imagen vista general de sala de ensayo">
               <img src="assets/img/salaEnsayo.webp" alt="Vista general de sala de ensayo" loading="lazy" width="800" height="533" />
             </button>
-            <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo.webp" data-alt="Setup para ensayo de banda" aria-label="Ampliar imagen setup para ensayo de banda">
-              <img src="assets/img/salaEnsayo.webp" alt="Setup para ensayo de banda" loading="lazy" width="800" height="533" />
+            <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo4.webp" data-alt="Iluminación profesional durante grabación" aria-label="Ampliar imagen description">
+              <img src="assets/img/salaEnsayo4.webp" alt="Iluminación profesional durante grabación" loading="lazy" width="800" height="533" />
             </button>
-            <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo.webp" data-alt="Zona de baterias y microfonos" aria-label="Ampliar imagen zona de baterias y microfonos">
-              <img src="assets/img/salaEnsayo.webp" alt="Zona de baterias y microfonos" loading="lazy" width="800" height="533" />
+            <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo6.webp" data-alt="Setup para ensayo de banda" aria-label="Ampliar imagen setup para ensayo de banda">
+              <img src="assets/img/salaEnsayo6.webp" alt="Setup para ensayo de banda" loading="lazy" width="800" height="533" />
+            </button>
+             <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo2.webp" data-alt="Grabación zona de baterias" aria-label="Ampliar imagen description">
+              <img src="assets/img/salaEnsayo2.webp" alt="Grabación zona de baterias" loading="lazy" width="800" height="533" />
+            </button>
+            <button type="button" class="gallery-item" data-lightbox="assets/img/salaEnsayo5.webp" data-alt="Zona de baterias y microfonos" aria-label="Ampliar imagen zona de baterias y microfonos">
+              <img src="assets/img/salaEnsayo5.webp" alt="Zona de baterias y microfonos" loading="lazy" width="800" height="533" />
+            </button>
+            <button type="button" class="gallery-item gallery-item-video" data-video="assets/img/recorridoSala.mp4" data-alt="Recorrido por la sala" aria-label="Reproducir video description">
+              <img src="assets/img/recorridoSala.mp4" alt="Recorrido por la sala" loading="lazy" width="800" height="533" />
             </button>
           </div>
           <button type="button" class="gallery-nav gallery-nav-next" aria-label="Imagen siguiente">
