@@ -400,14 +400,17 @@ p {
   position: relative;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-slide {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  aspect-ratio: 3 / 2;
+  transition: opacity 1.5s ease-in-out;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-slide.slide-banda {
@@ -415,8 +418,8 @@ p {
 }
 
 .hero-slide.slide-banda img {
-  object-fit: contain; /* Muestra el logo completo sin recortarlo */
-  padding: 24px;       /* Le da un margen interno elegante para que no toque los bordes */
+  object-fit:cover; /* Muestra el logo completo sin recortarlo */
+  padding: 0px;       /* Le da un margen interno elegante para que no toque los bordes */
   width: 100%;
   height: 100%;
 }
@@ -451,7 +454,7 @@ p {
   border-radius: 50%;
   background: rgba(249, 244, 239, 0.4);
   cursor: pointer;
-  transition: background-color 0.8s ease, transform 0.8s ease;
+  transition: background-color 1.5s ease, transform 1.5s ease;
 }
 
 .hero-dot.active {
@@ -459,11 +462,14 @@ p {
   transform: scale(1.25);
 }
 
-.hero-slide img, 
-.hero-slide picture {
+.hero-slide img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+
+
 }
 
 .cta-row {

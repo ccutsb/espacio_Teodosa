@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startHeroAutoplay = () => {
     if (heroSlides.length > 1) {
-      heroAutoplayInterval = setInterval(nextHeroSlide, 3500);
+      heroAutoplayInterval = setInterval(nextHeroSlide, 6000);
     }
   };
 
