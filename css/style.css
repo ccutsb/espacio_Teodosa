@@ -816,19 +816,21 @@ textarea {
   right: var(--space-16);
   bottom: var(--space-16);
   z-index: 80;
-  padding: 11px 14px;
-  border-radius: 999px;
+  padding: 11px 11px;
+  border-radius: 450px;
   text-decoration: none;
-  background: #1aa35f;
+  background: rgb(37, 211, 102);
   color: #fff;
-  border: 1px solid #1ec56f;
+  border: 1px solid rgb(37, 211, 102);
   box-shadow: var(--shadow-md);
   font-weight: 700;
 }
 
 .floating-book:hover {
-  background: #22b569;
+  background: rgb(37, 211, 102);
+  border-color: rgb(224, 231, 226);
   color: #fff;
+  border: 2px solid;
 }
 
 .nav-overlay {
